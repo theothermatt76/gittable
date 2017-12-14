@@ -1,0 +1,17 @@
+#!/bin/bash
+
+while [ 1 ];
+do
+#make the website whatever, and put search term (must be EXACT, including CaPiTalIZatioN)
+#in the "grep" portion 
+    count=`curl -s "www.google.com" | grep -c "Google"`
+#If you want to know when a phrase is NOT there, change this to = .
+#If you expect the phrase to not be there, leave it.
+#Change the number to how many times it normally shows up on the page.
+	if [ "$count" != "0" ]
+    then
+#Change the "go buy thing" to whatever you want, and use a valid email address. 
+	echo "Page updated!" | mail -s go_buy_thing! you@youremail.com
+       exit 0   
+    fi
+done
