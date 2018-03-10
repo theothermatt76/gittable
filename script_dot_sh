@@ -1,17 +1,25 @@
 #!/bin/bash
+###
+#this is a webpage monitor script I hacked together for jtweetyone. you set a website to look at, and a parameter to look for. It will email you if the parameter does or doesn't exist based on line 14
+#Matt Brister, 2018
+###
+
+
+##Set some  parameters. Search term must be EXACT, including CaPiTalIZatioN
+$webpage="www.google.com"
+$term="google"
+$email="you@yourisp.com"
+$msg="Go buy thing!!1!"
 
 while [ 1 ];
 do
-#make the website whatever, and put search term (must be EXACT, including CaPiTalIZatioN)
-#in the "grep" portion 
-    count=`curl -s "www.google.com" | grep -c "Google"`
+    count=`curl -s $webpage | grep -c $term"`
 #If you want to know when a phrase is NOT there, change this to = .
 #If you expect the phrase to not be there, leave it.
 #Change the number to how many times it normally shows up on the page.
 	if [ "$count" != "0" ]
     then
-#Change the "go buy thing" to whatever you want, and use a valid email address. 
-	echo "Page updated!" | mail -s go_buy_thing! you@youremail.com
+	echo "Page updated!" | mail -s $msg $email
        exit 0   
     fi
 done
